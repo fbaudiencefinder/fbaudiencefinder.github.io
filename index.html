@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FB Audience Finder</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#1877f2,#42a5f5);
+    margin:0;
+    padding:0;
+}
+
+.container {
+    max-width: 500px;
+    background: white;
+    margin: 80px auto;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+h1 {
+    color:#1877f2;
+}
+
+input {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border:1px solid #ccc;
+    font-size:16px;
+}
+
+button {
+    padding: 12px 20px;
+    background:#1877f2;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover {
+    background:#0d5ed7;
+}
+
+.links {
+    margin-top:20px;
+}
+
+a {
+    display:block;
+    margin:10px;
+    padding:10px;
+    background:#42a5f5;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>FB Audience Finder</h1>
+
+<input type="text" id="country" placeholder="Enter Country (Example: USA)">
+
+<input type="text" id="category" placeholder="Enter Category (Example: Cats, Islamic)">
+
+<button onclick="generateLinks()">
+Find Audience
+</button>
+
+<div class="links" id="results"></div>
+
+</div>
+
+<script>
+
+function generateLinks() {
+
+let country = document.getElementById("country").value;
+let category = document.getElementById("category").value;
+
+if(country=="" || category=="") {
+alert("Please enter Country and Category");
+return;
+}
+
+let groupSearch =
+"https://www.facebook.com/search/groups?q="
++ category + "%20" + country;
+
+let pageSearch =
+"https://www.facebook.com/search/pages?q="
++ category + "%20" + country;
+
+document.getElementById("results").innerHTML =
+`
+<a href="${groupSearch}" target="_blank">
+Search Facebook Groups
+</a>
+
+<a href="${pageSearch}" target="_blank">
+Search Facebook Pages
+</a>
+`;
+
+}
+
+</script>
+
+</body>
+</html>
