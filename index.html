@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
-<title>FB Audience Finder</title>
+
+<title>
+FB Audience Finder - Multi Search Tool
+</title>
 
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
@@ -17,25 +21,35 @@ background:#f4f6fb;
 }
 
 .header {
+
 background:#1877f2;
 color:white;
-padding:15px;
+padding:20px;
 text-align:center;
-font-size:26px;
-font-weight:bold;
+
 }
 
 .logo {
+
 font-size:28px;
 font-weight:bold;
+
+}
+
+.tagline {
+
+font-size:14px;
+margin-top:5px;
+
 }
 
 .ad-space {
-width:100%;
+
 height:90px;
 background:#e0e0e0;
 text-align:center;
 line-height:90px;
+
 }
 
 .container {
@@ -45,12 +59,12 @@ margin:40px auto;
 background:white;
 padding:30px;
 border-radius:12px;
-box-shadow:0 0 12px rgba(0,0,0,0.2);
+box-shadow:0 0 10px rgba(0,0,0,0.2);
 text-align:center;
 
 }
 
-input, select, button {
+input, button {
 
 width:90%;
 padding:12px;
@@ -87,6 +101,15 @@ text-decoration:none;
 
 }
 
+.keyword-box {
+
+background:#f0f0f0;
+padding:10px;
+margin-top:20px;
+border-radius:8px;
+
+}
+
 .footer {
 
 text-align:center;
@@ -114,15 +137,21 @@ text-decoration:none;
 FB Audience Finder
 </div>
 
+<div class="tagline">
+Find Targeted Facebook Groups & Pages Fast
+</div>
+
 </div>
 
 <div class="ad-space">
-Ad Space (Future Ads)
+Ad Space (Google Ads Later)
 </div>
 
 <div class="container">
 
-<h2>Find Targeted Facebook Groups</h2>
+<h2>
+Multi Facebook Search Tool
+</h2>
 
 <input
 type="text"
@@ -135,20 +164,42 @@ id="category"
 placeholder="Enter Category (Example: Cats)">
 
 <button onclick="generateLinks()">
-Find Audience
+
+Multi Search Groups & Pages
+
 </button>
 
-<div id="results" class="links"></div>
+<button onclick="generateKeywords()">
+
+Generate Keywords
+
+</button>
+
+<div id="results"
+class="links">
+
+</div>
+
+<div id="keywords"
+class="keyword-box">
+
+</div>
 
 </div>
 
 <div class="footer">
 
 <a href="about.html">About</a>
+
 <a href="privacy.html">Privacy</a>
+
 <a href="contact.html">Contact</a>
 
-<p>© 2026 FB Audience Finder</p>
+<a href="terms.html">Terms</a>
+
+<p>
+© 2026 FB Audience Finder
+</p>
 
 </div>
 
@@ -170,43 +221,72 @@ return;
 
 }
 
-let keyword1 =
-category + " " + country + " groups";
+let keywords = [
 
-let keyword2 =
-category + " lovers " + country;
+category + " groups in " + country,
 
-let keyword3 =
-category + " community " + country;
+category + " lovers " + country,
 
-let groupSearch =
-"https://www.facebook.com/search/groups?q="
-+ keyword1;
+category + " community " + country,
 
-let pageSearch =
-"https://www.facebook.com/search/pages?q="
-+ keyword2;
+category + " local groups " + country,
 
-let extraSearch =
-"https://www.facebook.com/search/groups?q="
-+ keyword3;
+category + " buy sell " + country
+
+];
+
+let output="";
+
+keywords.forEach(function(k){
+
+let link =
+"https://www.facebook.com/search/groups?q=" + k;
+
+output +=
+
+`<a href="${link}" target="_blank">
+Search: ${k}
+</a>`;
+
+});
 
 document.getElementById("results").innerHTML =
-`
+output;
 
-<a href="${groupSearch}" target="_blank">
-Search Groups (Targeted)
-</a>
+}
 
-<a href="${pageSearch}" target="_blank">
-Search Pages
-</a>
+function generateKeywords() {
 
-<a href="${extraSearch}" target="_blank">
-More Related Groups
-</a>
+let country =
+document.getElementById("country").value;
 
-`;
+let category =
+document.getElementById("category").value;
+
+let suggestions = [
+
+category + " groups " + country,
+
+category + " lovers " + country,
+
+category + " community " + country,
+
+category + " fans " + country,
+
+category + " discussion " + country
+
+];
+
+let text="";
+
+suggestions.forEach(function(k){
+
+text += k + "<br>";
+
+});
+
+document.getElementById("keywords").innerHTML =
+text;
 
 }
 
