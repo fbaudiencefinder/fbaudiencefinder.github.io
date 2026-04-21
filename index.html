@@ -3,24 +3,30 @@
 <head>
 
 <meta charset="UTF-8">
-<title>FB Audience Finder – Pro Version</title>
+<title>FB Audience Finder</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <style>
 
 body {
-font-family: Arial, sans-serif;
+font-family: Arial;
 margin:0;
-background:linear-gradient(135deg,#1877f2,#42a5f5);
+background:#f4f6fb;
 }
 
 .header {
 background:#1877f2;
 color:white;
-padding:18px;
+padding:15px;
 text-align:center;
 font-size:26px;
+font-weight:bold;
+}
+
+.logo {
+font-size:28px;
 font-weight:bold;
 }
 
@@ -30,33 +36,27 @@ height:90px;
 background:#e0e0e0;
 text-align:center;
 line-height:90px;
-color:#555;
 }
 
 .container {
 
-max-width:650px;
+max-width:700px;
 margin:40px auto;
 background:white;
 padding:30px;
 border-radius:12px;
-box-shadow:0 0 15px rgba(0,0,0,0.2);
+box-shadow:0 0 12px rgba(0,0,0,0.2);
 text-align:center;
 
 }
 
-h2 {
-color:#1877f2;
-}
-
-select, input, button {
+input, select, button {
 
 width:90%;
 padding:12px;
-margin:10px 0;
+margin:10px;
 border-radius:8px;
 border:1px solid #ccc;
-font-size:16px;
 
 }
 
@@ -78,29 +78,12 @@ background:#0d5ed7;
 .links a {
 
 display:block;
-margin:10px;
-padding:12px;
 background:#42a5f5;
 color:white;
-text-decoration:none;
+padding:12px;
+margin:10px;
 border-radius:8px;
-
-}
-
-.popular {
-
-margin-top:20px;
-
-}
-
-.popular span {
-
-display:inline-block;
-background:#f0f0f0;
-padding:8px 12px;
-margin:5px;
-border-radius:6px;
-cursor:pointer;
+text-decoration:none;
 
 }
 
@@ -108,8 +91,14 @@ cursor:pointer;
 
 text-align:center;
 padding:20px;
-font-size:14px;
-color:white;
+
+}
+
+.footer a {
+
+margin:0 10px;
+color:#1877f2;
+text-decoration:none;
 
 }
 
@@ -120,88 +109,44 @@ color:white;
 <body>
 
 <div class="header">
-FB Audience Finder PRO
+
+<div class="logo">
+FB Audience Finder
+</div>
+
 </div>
 
 <div class="ad-space">
-Ad Space (Google AdSense Later)
+Ad Space (Future Ads)
 </div>
 
 <div class="container">
 
-<h2>Find Facebook Audience Fast</h2>
+<h2>Find Targeted Facebook Groups</h2>
 
-<select id="countrySelect">
+<input
+type="text"
+id="country"
+placeholder="Enter Country (Example: USA)">
 
-<option value="">Select Country</option>
-
-<option>USA</option>
-<option>UK</option>
-<option>Canada</option>
-<option>Australia</option>
-<option>India</option>
-<option>Pakistan</option>
-<option>UAE</option>
-
-</select>
-
-<input type="text"
-id="manualCountry"
-placeholder="Or Type Country Manually">
-
-<select id="categorySelect">
-
-<option value="">Select Category</option>
-
-<option>Islamic</option>
-<option>Motivation</option>
-<option>Funny</option>
-<option>Business</option>
-<option>Quotes</option>
-<option>Cats</option>
-<option>Dogs</option>
-
-</select>
-
-<input type="text"
-id="manualCategory"
-placeholder="Or Type Category Manually">
+<input
+type="text"
+id="category"
+placeholder="Enter Category (Example: Cats)">
 
 <button onclick="generateLinks()">
 Find Audience
 </button>
 
-<div class="links" id="results"></div>
-
-<div class="popular">
-
-<h3>Popular Quick Keywords</h3>
-
-<span onclick="quickKeyword('Funny Memes')">
-Funny Memes
-</span>
-
-<span onclick="quickKeyword('Islamic Quotes')">
-Islamic Quotes
-</span>
-
-<span onclick="quickKeyword('Business Tips')">
-Business Tips
-</span>
-
-<span onclick="quickKeyword('Cat Lovers')">
-Cat Lovers
-</span>
-
-<span onclick="quickKeyword('Dog Lovers')">
-Dog Lovers
-</span>
-
-</div>
+<div id="results" class="links"></div>
 
 </div>
 
 <div class="footer">
+
+<a href="about.html">About</a>
+<a href="privacy.html">Privacy</a>
+<a href="contact.html">Contact</a>
 
 <p>© 2026 FB Audience Finder</p>
 
@@ -212,58 +157,56 @@ Dog Lovers
 function generateLinks() {
 
 let country =
-document.getElementById("countrySelect").value;
-
-let manualCountry =
-document.getElementById("manualCountry").value;
+document.getElementById("country").value;
 
 let category =
-document.getElementById("categorySelect").value;
-
-let manualCategory =
-document.getElementById("manualCategory").value;
-
-if(manualCountry!="")
-country=manualCountry;
-
-if(manualCategory!="")
-category=manualCategory;
+document.getElementById("category").value;
 
 if(country=="" || category=="") {
 
-alert("Please select or type Country and Category");
+alert("Enter Country and Category");
 
 return;
 
 }
 
+let keyword1 =
+category + " " + country + " groups";
+
+let keyword2 =
+category + " lovers " + country;
+
+let keyword3 =
+category + " community " + country;
+
 let groupSearch =
 "https://www.facebook.com/search/groups?q="
-+ category + "%20" + country;
++ keyword1;
 
 let pageSearch =
 "https://www.facebook.com/search/pages?q="
-+ category + "%20" + country;
++ keyword2;
+
+let extraSearch =
+"https://www.facebook.com/search/groups?q="
++ keyword3;
 
 document.getElementById("results").innerHTML =
 `
 
 <a href="${groupSearch}" target="_blank">
-Search Facebook Groups
+Search Groups (Targeted)
 </a>
 
 <a href="${pageSearch}" target="_blank">
-Search Facebook Pages
+Search Pages
+</a>
+
+<a href="${extraSearch}" target="_blank">
+More Related Groups
 </a>
 
 `;
-
-}
-
-function quickKeyword(keyword) {
-
-document.getElementById("manualCategory").value =
-keyword;
 
 }
 
