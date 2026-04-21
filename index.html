@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<title>FB Audience Finder – Find Facebook Groups & Pages Fast</title>
+<title>FB Audience Finder – Pro Version</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,15 +12,15 @@
 body {
 font-family: Arial, sans-serif;
 margin:0;
-background:#f5f7fb;
+background:linear-gradient(135deg,#1877f2,#42a5f5);
 }
 
 .header {
 background:#1877f2;
 color:white;
-padding:15px;
+padding:18px;
 text-align:center;
-font-size:24px;
+font-size:26px;
 font-weight:bold;
 }
 
@@ -29,45 +30,53 @@ height:90px;
 background:#e0e0e0;
 text-align:center;
 line-height:90px;
-font-size:14px;
 color:#555;
 }
 
 .container {
-max-width:600px;
+
+max-width:650px;
 margin:40px auto;
 background:white;
-padding:25px;
+padding:30px;
 border-radius:12px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
+box-shadow:0 0 15px rgba(0,0,0,0.2);
 text-align:center;
+
 }
 
 h2 {
 color:#1877f2;
 }
 
-select, button {
+select, input, button {
+
 width:90%;
 padding:12px;
 margin:10px 0;
 border-radius:8px;
 border:1px solid #ccc;
 font-size:16px;
+
 }
 
 button {
+
 background:#1877f2;
 color:white;
 border:none;
 cursor:pointer;
+
 }
 
 button:hover {
+
 background:#0d5ed7;
+
 }
 
 .links a {
+
 display:block;
 margin:10px;
 padding:12px;
@@ -75,19 +84,33 @@ background:#42a5f5;
 color:white;
 text-decoration:none;
 border-radius:8px;
+
+}
+
+.popular {
+
+margin-top:20px;
+
+}
+
+.popular span {
+
+display:inline-block;
+background:#f0f0f0;
+padding:8px 12px;
+margin:5px;
+border-radius:6px;
+cursor:pointer;
+
 }
 
 .footer {
+
 text-align:center;
 padding:20px;
 font-size:14px;
-color:#555;
-}
+color:white;
 
-.footer a {
-margin:0 10px;
-text-decoration:none;
-color:#1877f2;
 }
 
 </style>
@@ -97,7 +120,7 @@ color:#1877f2;
 <body>
 
 <div class="header">
-FB Audience Finder
+FB Audience Finder PRO
 </div>
 
 <div class="ad-space">
@@ -108,7 +131,7 @@ Ad Space (Google AdSense Later)
 
 <h2>Find Facebook Audience Fast</h2>
 
-<select id="country">
+<select id="countrySelect">
 
 <option value="">Select Country</option>
 
@@ -122,7 +145,11 @@ Ad Space (Google AdSense Later)
 
 </select>
 
-<select id="category">
+<input type="text"
+id="manualCountry"
+placeholder="Or Type Country Manually">
+
+<select id="categorySelect">
 
 <option value="">Select Category</option>
 
@@ -136,19 +163,45 @@ Ad Space (Google AdSense Later)
 
 </select>
 
+<input type="text"
+id="manualCategory"
+placeholder="Or Type Category Manually">
+
 <button onclick="generateLinks()">
 Find Audience
 </button>
 
 <div class="links" id="results"></div>
 
+<div class="popular">
+
+<h3>Popular Quick Keywords</h3>
+
+<span onclick="quickKeyword('Funny Memes')">
+Funny Memes
+</span>
+
+<span onclick="quickKeyword('Islamic Quotes')">
+Islamic Quotes
+</span>
+
+<span onclick="quickKeyword('Business Tips')">
+Business Tips
+</span>
+
+<span onclick="quickKeyword('Cat Lovers')">
+Cat Lovers
+</span>
+
+<span onclick="quickKeyword('Dog Lovers')">
+Dog Lovers
+</span>
+
+</div>
+
 </div>
 
 <div class="footer">
-
-<a href="#">About</a>
-<a href="#">Privacy Policy</a>
-<a href="#">Contact</a>
 
 <p>© 2026 FB Audience Finder</p>
 
@@ -159,14 +212,29 @@ Find Audience
 function generateLinks() {
 
 let country =
-document.getElementById("country").value;
+document.getElementById("countrySelect").value;
+
+let manualCountry =
+document.getElementById("manualCountry").value;
 
 let category =
-document.getElementById("category").value;
+document.getElementById("categorySelect").value;
+
+let manualCategory =
+document.getElementById("manualCategory").value;
+
+if(manualCountry!="")
+country=manualCountry;
+
+if(manualCategory!="")
+category=manualCategory;
 
 if(country=="" || category=="") {
-alert("Please select Country and Category");
+
+alert("Please select or type Country and Category");
+
 return;
+
 }
 
 let groupSearch =
@@ -179,6 +247,7 @@ let pageSearch =
 
 document.getElementById("results").innerHTML =
 `
+
 <a href="${groupSearch}" target="_blank">
 Search Facebook Groups
 </a>
@@ -186,11 +255,20 @@ Search Facebook Groups
 <a href="${pageSearch}" target="_blank">
 Search Facebook Pages
 </a>
+
 `;
+
+}
+
+function quickKeyword(keyword) {
+
+document.getElementById("manualCategory").value =
+keyword;
 
 }
 
 </script>
 
 </body>
+
 </html>
